@@ -1,23 +1,23 @@
 <template>
-        <div class="login_container">
-            <div class="login_box">
-                <!-- logo区域 -->
-                <div class="avatar_box">
-                    <img src="../assets/logo.png" alt="">
-                </div>
-                <!-- 登录表单区域 -->
-                <el-form :model="loginForm" ref="loginFormRef" :rules="loginRormRules" class="login_form">
-                    <el-form-item prop="username">
-                      <el-input prefix-icon="iconfont icon-user" v-model="loginForm.username"></el-input>
-                    </el-form-item>
-                    <el-form-item prop="password">
-                        <el-input type="password" prefix-icon="iconfont icon-3702mima" v-model="loginForm.password"></el-input>
-                    </el-form-item>
-                    <el-button type="primary" @click="login">登录</el-button>
-                    <el-button type="info" @click="resetLoginForm(loginForm)">重置</el-button>
-                </el-form>
-            </div>
+  <div class="login_container">
+    <div class="login_box">
+      <!-- logo区域 -->
+      <div class="avatar_box">
+        <img src="../assets/logo.png" alt="">
+      </div>
+      <!-- 登录表单区域 -->
+      <el-form ref="loginFormRef" :model="loginForm" :rules="loginRormRules" class="login_form">
+        <el-form-item prop="username">
+          <el-input v-model="loginForm.username" prefix-icon="iconfont icon-user" />
+        </el-form-item>
+        <el-form-item prop="password">
+          <el-input v-model="loginForm.password" type="password" prefix-icon="iconfont icon-3702mima" />
+        </el-form-item>
+        <el-button type="primary" @click="login">登录</el-button>
+        <el-button type="info" @click="resetLoginForm(loginForm)">重置</el-button>
+      </el-form>
     </div>
+  </div>
 </template>
 <script>
 export default {
