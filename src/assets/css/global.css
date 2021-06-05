@@ -12,3 +12,8 @@ html, body, #app {
 .el-card {
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15) !important;
 }
+/* 级联选择器菜单高度溢出问题结局
+   新旧版本问题，element-ui新版默认显示全部菜单内容，所以我们需要在css样式中对级联选择器菜单的高度进行限制 */
+.el-cascader-menu {
+  height: 300px;
+}
