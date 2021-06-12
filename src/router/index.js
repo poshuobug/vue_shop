@@ -16,6 +16,10 @@ import Role from '../components/power/Role.vue'
 import Cate from '../components/goods/Cate.vue'
 // 导入Params组件
 import Params from '../components/goods/Params.vue'
+// 导入List组件
+import List from '../components/goods/List.vue'
+// 导入Add页面
+import Add from '../components/goods/Add.vue'
 
 Vue.use(VueRouter)
 
@@ -32,7 +36,9 @@ const routes = [
       { path: '/rights', component: Rights },
       { path: '/roles', component: Role },
       { path: '/categories', component: Cate },
-      { path: '/params', component: Params }
+      { path: '/params', component: Params },
+      { path: '/goods', component: List },
+      { path: '/goods/add', component: Add }
     ]
   }
 ]

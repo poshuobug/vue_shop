@@ -8,5 +8,4 @@ export default {
   name: 'MyApp'
 }
 </script>
-<style>
-</style>
+<style></style>

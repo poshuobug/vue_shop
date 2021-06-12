@@ -8,5 +8,4 @@ export default {
   name: 'Welcome'
 }
 </script>
-<style lang="less" scoped>
-</style>
+<style lang="less" scoped></style>

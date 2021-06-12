@@ -6,6 +6,7 @@
       <el-breadcrumb-item>权限管理</el-breadcrumb-item>
       <el-breadcrumb-item>角色列表</el-breadcrumb-item>
     </el-breadcrumb>
+
     <!-- 卡片区域 -->
     <el-card>
       <!-- 添加角色 -->
@@ -18,7 +19,7 @@
             <el-row v-for="(item1, i1) in scope.row.children" :key="item1.id" :class="['bdbotton', i1 === 0 ? 'bdtop' : '', 'vcenter']">
               <!-- 一级权限 -->
               <el-col :span="5">
-                <el-tag @close="removeRightById(scope.row, item1)" closable>{{item1.authName}}</el-tag>
+                <el-tag @close="removeRightById(scope.row, item1)" closable>{{ item1.authName }}</el-tag>
                 <i class="el-icon-caret-right"></i>
               </el-col>
               <!-- 二级权限和三级 -->
@@ -26,11 +27,11 @@
                 <!-- 二级权限 -->
                 <el-row :class="[i2 === 0 ? '' : 'bdtop', 'vcenter']" v-for="(item2, i2) in item1.children" :key="item2.id">
                   <el-col :span="6">
-                    <el-tag @close="removeRightById(scope.row, item2)" closable type="success">{{item2.authName}}</el-tag>
+                    <el-tag @close="removeRightById(scope.row, item2)" closable type="success">{{ item2.authName }}</el-tag>
                     <i class="el-icon-caret-right"></i>
-                    </el-col>
+                  </el-col>
                   <el-col :span="18">
-                      <el-tag @close="removeRightById(scope.row, item3)" v-for="(item3) in item2.children" :key="item3.id" closable type="warning">{{item3.authName}}</el-tag>
+                    <el-tag @close="removeRightById(scope.row, item3)" v-for="item3 in item2.children" :key="item3.id" closable type="warning">{{ item3.authName }}</el-tag>
                   </el-col>
                 </el-row>
               </el-col>
@@ -39,42 +40,29 @@
         </el-table-column>
         <!-- 索引列 -->
         <el-table-column label="#" type="index"> </el-table-column>
-        <el-table-column prop="roleName" label="角色名称">
-        </el-table-column>
-        <el-table-column prop="roleDesc" label="角色描述">
-        </el-table-column>
+        <el-table-column prop="roleName" label="角色名称"> </el-table-column>
+        <el-table-column prop="roleDesc" label="角色描述"> </el-table-column>
         <el-table-column label="操作">
           <template slot-scope="scope">
             <el-button-group>
-            <el-button type="primary" size="mini" icon="el-icon-edit">编辑</el-button>
-            <el-button type="danger" size="mini" icon="el-icon-delete" @click="deleteRoleById(scope.row.id)">删除</el-button>
-            <el-button type="warning" size="mini" icon="el-icon-setting" @click="showSetRightDialog(scope.row)">分配权限</el-button>
-          </el-button-group>
+              <el-button type="primary" size="mini" icon="el-icon-edit">编辑</el-button>
+              <el-button type="danger" size="mini" icon="el-icon-delete" @click="deleteRoleById(scope.row.id)">删除</el-button>
+              <el-button type="warning" size="mini" icon="el-icon-setting" @click="showSetRightDialog(scope.row)">分配权限</el-button>
+            </el-button-group>
           </template>
         </el-table-column>
       </el-table>
     </el-card>
+
     <!-- 分配权限的对话框 -->
-    <el-dialog
-  title="提示"
-  @close="setRightDialogClosed"
-  :visible.sync="setRightDialogVisible"
-  width="50%">
-  <!-- 树形组件 -->
-  <el-tree
-  :data="rightList"
-  show-checkbox
-  node-key="id"
-  :default-expand-all="true"
-  :default-checked-keys="defKeys"
-  :props="treeProps"
-  ref="treeRef">
-</el-tree>
-  <span slot="footer" class="dialog-footer">
-    <el-button @click="setRightDialogVisible = false">取 消</el-button>
-    <el-button type="primary" @click="allotRights">确 定</el-button>
-  </span>
-</el-dialog>
+    <el-dialog title="提示" @close="setRightDialogClosed" :visible.sync="setRightDialogVisible" width="50%">
+      <!-- 树形组件 -->
+      <el-tree :data="rightList" show-checkbox node-key="id" :default-expand-all="true" :default-checked-keys="defKeys" :props="treeProps" ref="treeRef"> </el-tree>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="setRightDialogVisible = false">取 消</el-button>
+        <el-button type="primary" @click="allotRights">确 定</el-button>
+      </span>
+    </el-dialog>
   </div>
 </template>
 <script>
@@ -156,10 +144,7 @@ export default {
     },
     // 点击为角色分配权限
     async allotRights() {
-      const keys = [
-        ...this.$refs.treeRef.getCheckedKeys(),
-        ...this.$refs.treeRef.getHalfCheckedKeys()
-      ]
+      const keys = [...this.$refs.treeRef.getCheckedKeys(), ...this.$refs.treeRef.getHalfCheckedKeys()]
       const idStr = keys.join(',')
 
       const { data: res } = await this.$http.post(`roles/${this.roleId}/rights`, { rids: idStr })
@@ -176,7 +161,7 @@ export default {
 .el-table {
   margin-top: 15px;
 }
-.el-button-group>.el-button+.el-button {
+.el-button-group > .el-button + .el-button {
   margin-left: 10px;
 }
 .bdtop {

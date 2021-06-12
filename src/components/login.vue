@@ -3,7 +3,7 @@
     <div class="login_box">
       <!-- logo区域 -->
       <div class="avatar_box">
-        <img src="../assets/logo.png" alt="">
+        <img src="../assets/logo.png" alt="" />
       </div>
       <!-- 登录表单区域 -->
       <el-form ref="loginFormRef" :model="loginForm" :rules="loginRormRules" class="login_form">
@@ -21,7 +21,7 @@
 </template>
 <script>
 export default {
-  data () {
+  data() {
     return {
       // 登录表单数据
       loginForm: {
@@ -43,11 +43,11 @@ export default {
   },
   methods: {
     //   点击重置表单
-    resetLoginForm () {
+    resetLoginForm() {
       this.$refs.loginFormRef.resetFields()
     },
     // 点击登录
-    login () {
+    login() {
       // 登录验证表单
       this.$refs.loginFormRef.validate(async valid => {
         if (!valid) return
@@ -67,45 +67,45 @@ export default {
 </script>
 <style lang="less" scoped>
 .login_container {
-    height: 100%;
-    background-color: #2B4B6B;
+  height: 100%;
+  background-color: #2b4b6b;
 }
 .login_box {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%,-50%);
-    width: 450px;
-    height: 300px;
-    margin: 0 auto;
-    background-color: #ffff;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 450px;
+  height: 300px;
+  margin: 0 auto;
+  background-color: #ffff;
 }
 .avatar_box {
-    position: absolute;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 130px;
-    height: 130px;
-    padding: 10px;
-    border: 1px solid #cccc;
-    border-radius: 50%;
-    background-color: #ffff;
-    box-shadow: 0 0 10px #ddd;
-    img {
-        width: 100%;
-        height: 100%;
-        border-radius: 50%;
-        background-color: #cccc;
-    }
-}
-.login_form{
-    position: absolute;
-    left: 0;
-    top: 50%;
-    transform: translateY(-50%);
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 130px;
+  height: 130px;
+  padding: 10px;
+  border: 1px solid #cccc;
+  border-radius: 50%;
+  background-color: #ffff;
+  box-shadow: 0 0 10px #ddd;
+  img {
     width: 100%;
-    padding: 0 20px;
-    margin-top: 20px;
-    box-sizing: border-box;
+    height: 100%;
+    border-radius: 50%;
+    background-color: #cccc;
+  }
+}
+.login_form {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 100%;
+  padding: 0 20px;
+  margin-top: 20px;
+  box-sizing: border-box;
 }
 </style>

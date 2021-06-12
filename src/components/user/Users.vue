@@ -11,74 +11,36 @@
       <!-- 搜索区域 -->
       <el-row :gutter="20">
         <el-col :span="8">
-          <el-input
-            v-model="queryInfo.query"
-            placeholder="请输入内容"
-            class="input-with-select"
-            clearable
-            @clear="getUsersList"
-          >
-            <el-button
-              slot="append"
-              icon="el-icon-search"
-              @click="getUsersList"
-            />
+          <el-input v-model="queryInfo.query" placeholder="请输入内容" class="input-with-select" clearable @clear="getUsersList">
+            <el-button slot="append" icon="el-icon-search" @click="getUsersList" />
           </el-input>
         </el-col>
         <el-col :span="1">
-          <el-button type="primary" @click="addDialogVisible=true">添加用户</el-button>
+          <el-button type="primary" @click="addDialogVisible = true">添加用户</el-button>
         </el-col>
       </el-row>
       <!-- 用户数据表格 -->
       <el-table :data="usersList" style="width: 100%" border stripe>
         <el-table-column type="index" label="#" />
-        <el-table-column
-          prop="username"
-          label="姓名"
-          width="180"
-        />
-        <el-table-column
-          prop="email"
-          label="邮箱"
-          width="180"
-        />
+        <el-table-column prop="username" label="姓名" width="180" />
+        <el-table-column prop="email" label="邮箱" width="180" />
         <el-table-column prop="mobile" label="电话" />
         <el-table-column prop="role_name" label="角色" />
         <el-table-column prop="mg_state" label="状态">
           <template slot-scope="scope">
-            <el-switch
-              v-model="scope.row.mg_state"
-              active-color="#13ce66"
-              inactive-color="#ff4949"
-              @change="stateChange(scope.row, $event)"
-            />
+            <el-switch v-model="scope.row.mg_state" active-color="#13ce66" inactive-color="#ff4949" @change="stateChange(scope.row, $event)" />
           </template>
         </el-table-column>
         <el-table-column prop="role_name" label="操作">
           <template slot-scope="scope">
             <el-button-group>
               <!-- 修改 -->
-              <el-button
-                type="primary"
-                icon="el-icon-edit"
-                size="mini"
-                @click="showEditDialog(scope.row.id)"
-              />
+              <el-button type="primary" icon="el-icon-edit" size="mini" @click="showEditDialog(scope.row.id)" />
               <!-- 删除 -->
-              <el-button
-                type="danger"
-                icon="el-icon-delete"
-                size="mini"
-                @click="deleteUserById(scope.row.id)"
-              />
+              <el-button type="danger" icon="el-icon-delete" size="mini" @click="deleteUserById(scope.row.id)" />
               <!-- 分配角色 -->
               <el-tooltip content="分配角色" placement="top" :enterable="false">
-                <el-button
-                  type="warning"
-                  icon="el-icon-setting"
-                  size="mini"
-                  @click="setRole(scope.row)"
-                />
+                <el-button type="warning" icon="el-icon-setting" size="mini" @click="setRole(scope.row)" />
               </el-tooltip>
             </el-button-group>
           </template>
@@ -96,12 +58,7 @@
       />
     </el-card>
     <!-- 添加用户的对话框 -->
-    <el-dialog
-      title="添加用户"
-      :visible.sync="addDialogVisible"
-      width="40%"
-      @close="addDialogClosed"
-    >
+    <el-dialog title="添加用户" :visible.sync="addDialogVisible" width="40%" @close="addDialogClosed">
       <!-- 表单区域 -->
       <el-form ref="addUserFormRef" :model="addUserForm" :rules="addUserRules" label-width="90px">
         <el-form-item label="用户名" prop="username">
@@ -124,12 +81,7 @@
       </span>
     </el-dialog>
     <!-- 修改用户的对话框 -->
-    <el-dialog
-      title="修改用户"
-      :visible.sync="editDialogVisible"
-      width="40%"
-      @close="EditDialogClosed"
-    >
+    <el-dialog title="修改用户" :visible.sync="editDialogVisible" width="40%" @close="EditDialogClosed">
       <!-- 表单区域 -->
       <el-form ref="editUserFormRef" :model="editUserForm" :rules="editUserRules" label-width="90px">
         <el-form-item label="用户名" prop="username">
@@ -149,30 +101,22 @@
       </span>
     </el-dialog>
     <!-- 分配角色对话框 -->
-    <el-dialog
-  title="提示"
-  :visible.sync="setRoleDialogVisible"
-  width="50%"
-  @close="setRoleDialogClosed">
-  <div>
-    <p>当前的用户：{{userInfo.username}}</p>
-    <p>当前的角色：{{userInfo.role_name}}</p>
-    <p>分配新角色：
-      <el-select v-model="selectedRoleId" placeholder="请选择">
-    <el-option
-      v-for="item in roleList"
-      :key="item.id"
-      :label="item.roleName"
-      :value="item.id">
-    </el-option>
-  </el-select>
-    </p>
-  </div>
-  <span slot="footer" class="dialog-footer">
-    <el-button @click="setRoleDialogVisible = false">取 消</el-button>
-    <el-button type="primary" @click="saveRoleInfo">确 定</el-button>
-  </span>
-</el-dialog>
+    <el-dialog title="提示" :visible.sync="setRoleDialogVisible" width="50%" @close="setRoleDialogClosed">
+      <div>
+        <p>当前的用户：{{ userInfo.username }}</p>
+        <p>当前的角色：{{ userInfo.role_name }}</p>
+        <p>
+          分配新角色：
+          <el-select v-model="selectedRoleId" placeholder="请选择">
+            <el-option v-for="item in roleList" :key="item.id" :label="item.roleName" :value="item.id"> </el-option>
+          </el-select>
+        </p>
+      </div>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="setRoleDialogVisible = false">取 消</el-button>
+        <el-button type="primary" @click="saveRoleInfo">确 定</el-button>
+      </span>
+    </el-dialog>
   </div>
 </template>
 <script>
@@ -286,9 +230,7 @@ export default {
     },
     // 监听状态的改变
     async stateChange(row, event) {
-      const { data: res } = await this.$http.put(
-        'users/' + row.id + '/state/' + event
-      )
+      const { data: res } = await this.$http.put('users/' + row.id + '/state/' + event)
       if (res.meta.status !== 200) return this.$message.error('更新用户状态失败！')
       this.$message.success('更新用户状态成功！')
       this.getUsersList()
@@ -388,7 +330,7 @@ export default {
 .el-pagination {
   margin-top: 15px;
 }
-.el-button-group>.el-button:not(:last-child) {
+.el-button-group > .el-button:not(:last-child) {
   margin-right: 5px;
 }
 </style>
