@@ -5,7 +5,7 @@ import './plugins/element.js'
 // 导入全局样式
 import './assets/css/global.css'
 // 导入font
-import '../src/assets/fonts/iconfont.css'
+import './assets/fonts/iconfont.css'
 // 导入axios
 import axios from 'axios'
 // 导入TreeTable
@@ -15,6 +15,9 @@ import VueQuillEditor from 'vue-quill-editor'
 import 'quill/dist/quill.core.css'
 import 'quill/dist/quill.snow.css'
 import 'quill/dist/quill.bubble.css'
+// 导入nprogress
+import Nprogress from 'nprogress'
+import 'nprogress/nprogress.css'
 
 // 屏蔽浏览器console面板的提示信息
 Vue.config.productionTip = false
@@ -24,9 +27,17 @@ axios.defaults.baseURL = 'http://127.0.0.1:8888/api/private/v1/'
 
 // 请求拦截器
 axios.interceptors.request.use(config => {
+  // 展示进度条
+  Nprogress.start()
   // 为当前请求配置Token认证字段
   config.headers.Authorization = window.localStorage.getItem('token')
   return config
+})
+
+// 响应拦截器
+axios.interceptors.response.use(response => {
+  Nprogress.done()
+  return response
 })
 
 // 全局配置axios
