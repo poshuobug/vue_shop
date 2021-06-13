@@ -73,7 +73,7 @@
     <!-- 展示物流进度的对话框 -->
     <el-dialog title="物流进度" :visible.sync="progressVisible" width="30%">
       <!-- 时间线 -->
-      <el-timeline :reverse="reverse">
+      <el-timeline>
         <el-timeline-item v-for="(activity, index) in progressInfo" :key="index" :timestamp="activity.time">
           {{ activity.context }}
         </el-timeline-item>
